@@ -1024,7 +1024,7 @@ $(recovery_uncompressed_ramdisk): $(MKBOOTFS) \
 $(recovery_ramdisk): $(MINIGZIP) \
 		$(recovery_uncompressed_ramdisk)
 	@echo -e ${CL_CYN}"----- Making compressed recovery ramdisk ------"${CL_RST}
-	$(hide) $(MINIGZIP) < $(recovery_uncompressed_ramdisk) > $@
+	$(hide) cat $(recovery_uncompressed_ramdisk) | lzma -e > $@
 
 ifndef BOARD_CUSTOM_BOOTIMG_MK
 $(INSTALLED_RECOVERYIMAGE_TARGET): $(MKBOOTIMG) $(recovery_ramdisk) $(recovery_kernel) \
